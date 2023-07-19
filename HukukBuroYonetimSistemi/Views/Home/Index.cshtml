@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<form method="post" action="/Mahkeme/Kaydet">
+                                <!-- Mahkeme -->
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div style="display: inline-block;">
+                                            <label for="Mahkeme" class="col-form-label">Mahkeme</label>
+                                        </div>
+
+                                        <div style="display: inline-block;">
+                                            <!-- asp-for ile property ismini belirtiyoruz -->
+                                            <select id="Mahkeme" name="Mahkeme" class="dropdown-header">
+                                                <option value="Sulh Ceza">Sulh Ceza</option>
+                                                <option value="Asliye Ceza">Asliye Ceza</option>
+                                                <option value="Hukuk">Hukuk</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dosya No -->
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div style="display: inline-block;">
+                                            <label for="DosyaNo" class="col-form-label">Dosya No</label>
+                                        </div>
+                                        <div style="display: inline-block;">
+                                            <!-- asp-for ile property ismini belirtiyoruz -->
+                                            <input type="text" id="DosyaNo" name="DosyaNo" class="form-control" placeholder="Dosya No">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Gelen Evrak Türü -->
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div style="display: inline-block;">
+                                            <label for="GelenEvrakTuru" class="col-form-label">Gelen Evrak Türü</label>
+                                        </div>
+
+                                        <div style="display: inline-block;">
+                                            <!-- asp-for ile property ismini belirtiyoruz -->
+                                            <select id="GelenEvrakTuru" name="GelenEvrakTuru" class="dropdown-header">
+                                                <option value="Dava dilekçesi">Dava dilekçesi</option>
+                                                <option value="Cevap Dilekçesi">Cevap Dilekçesi</option>
+                                                <option value="Cevaba Cevap Dilekçesi">Cevaba Cevap Dilekçesi</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tebliğ Türü -->
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div style="display: inline-block;">
+                                            <label for="TebligTuru" class="col-form-label">Tebliğ Türü</label>
+                                        </div>
+
+                                        <div style="display: inline-block;">
+                                            <!-- asp-for ile property ismini belirtiyoruz -->
+                                            <select id="TebligTuru" name="TebligTuru" class="dropdown-header">
+                                                <option value="E-Tebligat">E-Tebligat</option>
+                                                <option value="Fiziki Tebligat">Fiziki Tebligat</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tebliğ Tarihi -->
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div style="display: inline-block;">
+                                            <label for="TebligTarihi" class="col-form-label">Tebliğ Tarihi</label>
+                                        </div>
+
+                                        <div style="display: inline-block;">
+                                            <!-- asp-for ile property ismini belirtiyoruz -->
+                                            <input type="date" id="TebligTarihi" name="TebligTarihi" class="form-control" placeholder="Tebliğ Tarihi">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Kaydet -->
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div class="text-center p-20 upgrade-btn">
+                                            <button type="submit" class="btn d-grid btn-success text-white">Kaydet</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
