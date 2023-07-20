@@ -2,10 +2,10 @@
 
 namespace HukukBuroYonetimSistemi.Models.Domain
 {
-    public class GorevAtama
+    public class GorevAtamalar
     {
         [Key]
         public int Id { get; set; }
-        public UserModel UserName { get; set; }
+        public Users UserName { get; set; }
     }
 }

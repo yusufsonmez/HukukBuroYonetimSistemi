@@ -2,7 +2,7 @@
 
 namespace HukukBuroYonetimSistemi.Models.Domain
 {
-    public class UserModel
+    public class Users
     {
         [Key]
         public int Id { get; set; }

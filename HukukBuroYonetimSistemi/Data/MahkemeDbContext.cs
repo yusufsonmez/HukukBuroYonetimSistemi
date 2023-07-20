@@ -9,8 +9,8 @@ namespace HukukBuroYonetimSistemi.Data
         {
         }
 
-        public DbSet<MahkemeModel> MahkemeModel { get; set; }
-        public DbSet<GorevAtama> GorevAtama { get; set; }
-        public DbSet<UserModel> UserModel { get; set; }
+        public DbSet<Mahkemeler> Mahkemeler { get; set; }
+        public DbSet<GorevAtamalar> GorevAtamalar { get; set; }
+        public DbSet<Users> Users { get; set; }
     }
 }

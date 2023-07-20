@@ -2,7 +2,7 @@
 
 namespace HukukBuroYonetimSistemi.Models.Domain
 {
-    public class MahkemeModel
+    public class Mahkemeler
     {
         [Key]
         public int Id { get; set; }
@@ -16,7 +16,7 @@ namespace HukukBuroYonetimSistemi.Models.Domain
         public string GelmeTarihi { get; set; }
         public DateTime HedefSureSonGun { get; set; }
         public DateTime Gorev { get; set; }
-        public GorevAtama GorevAtama { get; set; }
+        public GorevAtamalar GorevAtama { get; set; }
         public DateTime DurusmaTarihi { get; set; }
         public DateTime InsertDate { get; set; }
         public DateTime UpdateDate { get; set; }

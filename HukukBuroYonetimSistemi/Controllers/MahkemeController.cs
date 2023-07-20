@@ -11,7 +11,7 @@ namespace HukukBuroYonetimSistemi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Kaydet(MahkemeModel model)
+        public IActionResult Kaydet(Mahkemeler model)
         {
             // Verileri model üzerinden alın ve istediğiniz işlemleri yapın
 
