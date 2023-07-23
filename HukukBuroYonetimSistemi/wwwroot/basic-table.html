@@ -106,7 +106,7 @@
                         <li>
                             <a class="profile-pic" href="#">
                                 <img src="plugins/images/users/varun.jpg" alt="user-img" width="36"
-                                     class="img-circle"><span class="text-white font-medium">Steave</span>
+                                     class="img-circle"><span class="text-white font-medium">Cem</span>
                             </a>
                         </li>
                         <!-- ============================================================== -->
@@ -203,19 +203,19 @@
             <!-- ============================================================== -->
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <!--<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Basic Table</h4>
-                    </div>
+                    </div>-->
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
-                            <ol class="breadcrumb ms-auto">
+                            <!--<ol class="breadcrumb ms-auto">
                                 <li><a href="#" class="fw-normal">Dashboard</a></li>
                             </ol>
                             <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">
                                 Upgrade
                                 to Pro
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                 </div>
@@ -227,130 +227,137 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+            <div class="white-box">
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
-                            <p class="text-muted">Add class <code>.table</code></p>
+                <form method="post" action="/Mahkeme/Kaydet">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- Mahkeme Section (Left Side) -->
+                            <div class="col-md-6">
+                                <h3 class="box-title">Mahkeme</h3>
 
-                            <form method="post" action="/Mahkeme/Kaydet">
                                 <!-- Mahkeme -->
                                 <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <div style="display: inline-block;">
-                                            <label for="Mahkeme" class="col-form-label">Mahkeme</label>
-                                        </div>
-
-                                        <div style="display: inline-block;">
-                                            <!-- asp-for ile property ismini belirtiyoruz -->
-                                            <select id="Mahkeme" name="Mahkeme" class="dropdown-header">
-                                                <option value="Sulh Ceza">Sulh Ceza</option>
-                                                <option value="Asliye Ceza">Asliye Ceza</option>
-                                                <option value="Hukuk">Hukuk</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <label for="Mahkeme" class="col-form-label">Mahkeme</label>
+                                    <select id="Mahkeme" name="Mahkeme" class="form-control">
+                                        <option value="Sulh Ceza">Sulh Ceza</option>
+                                        <option value="Asliye Ceza">Asliye Ceza</option>
+                                        <option value="Hukuk">Hukuk</option>
+                                    </select>
                                 </div>
 
                                 <!-- Dosya No -->
                                 <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <div style="display: inline-block;">
-                                            <label for="DosyaNo" class="col-form-label">Dosya No</label>
-                                        </div>
-                                        <div style="display: inline-block;">
-                                            <!-- asp-for ile property ismini belirtiyoruz -->
-                                            <input type="text" id="DosyaNo" name="DosyaNo" class="form-control" placeholder="Dosya No">
-                                        </div>
-                                    </div>
+                                    <label for="DosyaNo" class="col-form-label">Dosya No</label>
+                                    <input type="text" id="DosyaNo" name="DosyaNo" class="form-control" placeholder="Dosya No">
                                 </div>
 
                                 <!-- Gelen Evrak Türü -->
                                 <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <div style="display: inline-block;">
-                                            <label for="GelenEvrakTuru" class="col-form-label">Gelen Evrak Türü</label>
-                                        </div>
-
-                                        <div style="display: inline-block;">
-                                            <!-- asp-for ile property ismini belirtiyoruz -->
-                                            <select id="GelenEvrakTuru" name="GelenEvrakTuru" class="dropdown-header">
-                                                <option value="Dava dilekçesi">Dava dilekçesi</option>
-                                                <option value="Cevap Dilekçesi">Cevap Dilekçesi</option>
-                                                <option value="Cevaba Cevap Dilekçesi">Cevaba Cevap Dilekçesi</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <label for="GelenEvrakTuru" class="col-form-label">Gelen Evrak Türü</label>
+                                    <select id="GelenEvrakTuru" name="GelenEvrakTuru" class="form-control">
+                                        <option value="Dava dilekçesi">Dava dilekçesi</option>
+                                        <option value="Cevap Dilekçesi">Cevap Dilekçesi</option>
+                                        <option value="Cevaba Cevap Dilekçesi">Cevaba Cevap Dilekçesi</option>
+                                    </select>
                                 </div>
 
                                 <!-- Tebliğ Türü -->
                                 <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <div style="display: inline-block;">
-                                            <label for="TebligTuru" class="col-form-label">Tebliğ Türü</label>
-                                        </div>
-
-                                        <div style="display: inline-block;">
-                                            <!-- asp-for ile property ismini belirtiyoruz -->
-                                            <select id="TebligTuru" name="TebligTuru" class="dropdown-header">
-                                                <option value="E-Tebligat">E-Tebligat</option>
-                                                <option value="Fiziki Tebligat">Fiziki Tebligat</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <label for="TebligTuru" class="col-form-label">Tebliğ Türü</label>
+                                    <select id="TebligTuru" name="TebligTuru" class="form-control">
+                                        <option value="E-Tebligat">E-Tebligat</option>
+                                        <option value="Fiziki Tebligat">Fiziki Tebligat</option>
+                                    </select>
                                 </div>
 
                                 <!-- Tebliğ Tarihi -->
                                 <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <div style="display: inline-block;">
-                                            <label for="TebligTarihi" class="col-form-label">Tebliğ Tarihi</label>
-                                        </div>
+                                    <label for="TebligTarihi" class="col-form-label">Tebliğ Tarihi</label>
+                                    <input type="date" id="TebligTarihi" name="TebligTarihi" class="form-control" placeholder="Tebliğ Tarihi">
+                                </div>
 
-                                        <div style="display: inline-block;">
-                                            <!-- asp-for ile property ismini belirtiyoruz -->
-                                            <input type="date" id="TebligTarihi" name="TebligTarihi" class="form-control" placeholder="Tebliğ Tarihi">
-                                        </div>
-                                    </div>
+                                <!-- Duruşma Tarihi -->
+                                <div class="form-group">
+                                    <label for="DurusmaTarihi" class="col-form-label">Duruşma Tarihi</label>
+                                    <input type="date" id="DurusmaTarihi" name="DurusmaTarihi" class="form-control" placeholder="DurusmaTarihi">
                                 </div>
 
                                 <!-- Kaydet -->
                                 <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <div class="text-center p-20 upgrade-btn">
-                                            <button type="submit" class="btn d-grid btn-success text-white">Kaydet</button>
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn btn-success">Kaydet</button>
+                                </div>
+                        </div>
+
+                        <!-- Diğer Section (Right Side) -->
+                        <div class="col-md-6">
+                                <h3 class="box-title">Diğer</h3>
+
+                                <!-- Diğer -->
+                                <div class="form-group">
+                                    <label for="Diger" class="col-form-label">Diğer</label>
+                                    <select id="Diger" name="Diger" class="form-control">
+                                        <option value="Ihtarname">İhtarname</option>
+                                        <option value="Sozlesme">Sözleşme</option>
+                                    </select>
                                 </div>
 
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <!-- İş Türü -->
+                                <div class="form-group">
+                                    <label for="IsTuru" class="col-form-label">İş Türü</label>
+                                    <select id="IsTuru" name="IsTuru" class="form-control">
+                                        <option value="IsTuru">Dava Aç</option>
+                                    </select>
+                                </div>
 
-            <!-- ============================================================== -->
-            <!-- End Page wrapper  -->
-            <!-- ============================================================== -->
+                                <!-- Gelme Tarihi -->
+                                <div class="form-group">
+                                    <label for="GelmeTarihi" class="col-form-label">Gelme Tarihi</label>
+                                    <input type="date" id="GelmeTarihi" name="GelmeTarihi" class="form-control" placeholder="Gelme Tarihi">
+                                </div>
+
+                                <!-- Hedef Süre Son Gün -->
+                                <div class="form-group">
+                                    <label for="HedefSureSonGun" class="col-form-label">Hedef Süre Son Gün</label>
+                                    <input type="date" id="HedefSureSonGun" name="HedefSureSonGun" class="form-control" placeholder="Hedef Süre Son Gün">
+                                </div>
+
+                                <!-- Görev -->
+                                <div class="form-group">
+                                    <label for="Gorev" class="col-form-label">Görev</label>
+                                    <input type="date" id="Gorev" name="Gorev" class="form-control" placeholder="Görev">
+                                </div>
+
+                                <!-- Görev Atama -->
+                                <div class="form-group">
+                                    <label for="GorevAtama" class="col-form-label">Görev Atama</label>
+                                    <select id="GorevAtama" name="GorevAtama" class="form-control">
+                                        <option value="MehmetCemSönmez">Mehmet Cem Sönmez</option>
+                                        <option value="YusufSonmez">Yusuf Sönmez</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            </form>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Wrapper -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
-        <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/app-style-switcher.js"></script>
-        <!--Wave Effects -->
-        <script src="js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="js/custom.js"></script>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Wrapper -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- All Jquery -->
+            <!-- ============================================================== -->
+            <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap tether Core JavaScript -->
+            <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="js/app-style-switcher.js"></script>
+            <!--Wave Effects -->
+            <script src="js/waves.js"></script>
+            <!--Menu sidebar -->
+            <script src="js/sidebarmenu.js"></script>
+            <!--Custom JavaScript -->
+            <script src="js/custom.js"></script>
 </body>
 
 </html>

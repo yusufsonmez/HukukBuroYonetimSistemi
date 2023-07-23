@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HukukBuroYonetimSistemi.Models.Domain
 {
@@ -14,5 +15,10 @@ namespace HukukBuroYonetimSistemi.Models.Domain
         public DateTime UpdateDate { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
+
+        // GorevAtamalar tablosuna foreign key ilişkisi
+        [ForeignKey("GorevAtama")]
+        public int? GorevAtamaId { get; set; }
+        public GorevAtamalar GorevAtama { get; set; }
     }
 }

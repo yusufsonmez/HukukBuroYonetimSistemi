@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HukukBuroYonetimSistemi.Models.Domain
 {
@@ -16,6 +17,10 @@ namespace HukukBuroYonetimSistemi.Models.Domain
         public string GelmeTarihi { get; set; }
         public DateTime HedefSureSonGun { get; set; }
         public DateTime Gorev { get; set; }
+
+        // GorevAtamalar tablosuna foreign key ilişkisi
+        [ForeignKey("GorevAtama")]
+        public int? GorevAtamaId { get; set; }
         public GorevAtamalar GorevAtama { get; set; }
         public DateTime DurusmaTarihi { get; set; }
         public DateTime InsertDate { get; set; }

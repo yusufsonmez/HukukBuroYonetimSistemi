@@ -1,3 +1,5 @@
+using BaseProject.Repositories;
+using BaseProject.Services;
 using HukukBuroYonetimSistemi.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MahkemeDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<MahkemeRepository>();
+builder.Services.AddScoped<MahkemeService>();
 
 var app = builder.Build();
 
