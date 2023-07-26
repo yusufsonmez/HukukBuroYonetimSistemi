@@ -4,6 +4,7 @@ using HukukBuroYonetimSistemi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HukukBuroYonetimSistemi.Migrations
 {
     [DbContext(typeof(MahkemeDbContext))]
-    partial class MahkemeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230726220009_UsersInsertDateUpdateDateNullable")]
+    partial class UsersInsertDateUpdateDateNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,9 +89,6 @@ namespace HukukBuroYonetimSistemi.Migrations
 
                     b.Property<DateTime>("Gorev")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("GorevAtamalar")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("HedefSureSonGun")
                         .HasColumnType("datetime2");
@@ -169,7 +169,7 @@ namespace HukukBuroYonetimSistemi.Migrations
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.GorevAtamalar", b =>
                 {
                     b.HasOne("HukukBuroYonetimSistemi.Models.Domain.Mahkemeler", "Mahkeme")
-                        .WithMany()
+                        .WithMany("GorevAtamalar")
                         .HasForeignKey("MahkemeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -183,6 +183,11 @@ namespace HukukBuroYonetimSistemi.Migrations
                     b.Navigation("Mahkeme");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.Mahkemeler", b =>
+                {
+                    b.Navigation("GorevAtamalar");
                 });
 
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.Users", b =>

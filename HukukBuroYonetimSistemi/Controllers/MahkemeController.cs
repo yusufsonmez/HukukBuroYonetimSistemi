@@ -30,5 +30,10 @@ namespace HukukBuroYonetimSistemi.Controllers
             // İşlemler tamamlandıktan sonra istediğiniz bir sayfaya yönlendirin veya başka bir işlem yapın
             return RedirectToAction("Index");
         }
+        public List<Mahkemeler> GetMahkemelerByUserId(int userId)
+        {
+            var mahkemeler = _mahkemeService.GetMahkemelerByUserId(userId);
+            return mahkemeler;
+        }
     }
 }

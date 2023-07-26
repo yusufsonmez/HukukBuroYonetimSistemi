@@ -6,25 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HukukBuroYonetimSistemi.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDatabase : Migration
+    public partial class AddTablesAndRealationships : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "GorevAtamalar",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GorevAtamaId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GorevAtamalar", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Mahkemeler",
                 columns: table => new
@@ -41,7 +27,6 @@ namespace HukukBuroYonetimSistemi.Migrations
                     GelmeTarihi = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HedefSureSonGun = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Gorev = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GorevAtamaId = table.Column<int>(type: "int", nullable: true),
                     DurusmaTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
                     InsertDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -51,11 +36,6 @@ namespace HukukBuroYonetimSistemi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Mahkemeler", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Mahkemeler_GorevAtamalar_GorevAtamaId",
-                        column: x => x.GorevAtamaId,
-                        principalTable: "GorevAtamalar",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -71,60 +51,65 @@ namespace HukukBuroYonetimSistemi.Migrations
                     InsertDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    GorevAtamaId = table.Column<int>(type: "int", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GorevAtamalar",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MahkemeId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    InsertDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GorevAtamalar", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_GorevAtamalar_GorevAtamaId",
-                        column: x => x.GorevAtamaId,
-                        principalTable: "GorevAtamalar",
+                        name: "FK_GorevAtamalar_Mahkemeler_MahkemeId",
+                        column: x => x.MahkemeId,
+                        principalTable: "Mahkemeler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GorevAtamalar_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_GorevAtamalar_MahkemeId",
+                table: "GorevAtamalar",
+                column: "MahkemeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GorevAtamalar_UserId",
                 table: "GorevAtamalar",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Mahkemeler_GorevAtamaId",
-                table: "Mahkemeler",
-                column: "GorevAtamaId",
-                unique: true,
-                filter: "[GorevAtamaId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_GorevAtamaId",
-                table: "Users",
-                column: "GorevAtamaId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_GorevAtamalar_Users_UserId",
-                table: "GorevAtamalar",
-                column: "UserId",
-                principalTable: "Users",
-                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_GorevAtamalar_Users_UserId",
-                table: "GorevAtamalar");
+            migrationBuilder.DropTable(
+                name: "GorevAtamalar");
 
             migrationBuilder.DropTable(
                 name: "Mahkemeler");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "GorevAtamalar");
         }
     }
 }

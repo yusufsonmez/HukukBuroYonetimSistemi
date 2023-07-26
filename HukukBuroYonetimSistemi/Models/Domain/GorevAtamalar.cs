@@ -10,12 +10,17 @@ namespace HukukBuroYonetimSistemi.Models.Domain
 
         // Mahkemeler tablosuna foreign key ilişkisi
         [ForeignKey("Mahkeme")]
-        public int? GorevAtamaId { get; set; }
-        public Mahkemeler GorevAtama { get; set; }
+        public int MahkemeId { get; set; }
+        public Mahkemeler Mahkeme { get; set; }
 
         // Users tablosuna foreign key ilişkisi
         [ForeignKey("User")]
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         public Users User { get; set; }
+        public DateTime InsertDate { get; set; }
+        public DateTime UpdateDate { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
+
     }
 }

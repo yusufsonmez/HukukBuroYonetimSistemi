@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HukukBuroYonetimSistemi.Migrations
 {
     [DbContext(typeof(MahkemeDbContext))]
-    [Migration("20230723223916_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20230726215652_AddTablesAndRealationships")]
+    partial class AddTablesAndRealationships
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,13 +33,27 @@ namespace HukukBuroYonetimSistemi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("GorevAtamaId")
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MahkemeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MahkemeId");
 
                     b.HasIndex("UserId");
 
@@ -76,9 +90,6 @@ namespace HukukBuroYonetimSistemi.Migrations
                     b.Property<DateTime>("Gorev")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GorevAtamaId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("HedefSureSonGun")
                         .HasColumnType("datetime2");
 
@@ -111,10 +122,6 @@ namespace HukukBuroYonetimSistemi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GorevAtamaId")
-                        .IsUnique()
-                        .HasFilter("[GorevAtamaId] IS NOT NULL");
-
                     b.ToTable("Mahkemeler");
                 });
 
@@ -129,10 +136,6 @@ namespace HukukBuroYonetimSistemi.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GorevAtamaId")
-                        .IsRequired()
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime2");
@@ -160,44 +163,36 @@ namespace HukukBuroYonetimSistemi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GorevAtamaId");
-
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.GorevAtamalar", b =>
                 {
+                    b.HasOne("HukukBuroYonetimSistemi.Models.Domain.Mahkemeler", "Mahkeme")
+                        .WithMany("GorevAtamalar")
+                        .HasForeignKey("MahkemeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HukukBuroYonetimSistemi.Models.Domain.Users", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithMany("GorevAtamalar")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Mahkeme");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.Mahkemeler", b =>
                 {
-                    b.HasOne("HukukBuroYonetimSistemi.Models.Domain.GorevAtamalar", "GorevAtama")
-                        .WithOne("GorevAtama")
-                        .HasForeignKey("HukukBuroYonetimSistemi.Models.Domain.Mahkemeler", "GorevAtamaId");
-
-                    b.Navigation("GorevAtama");
+                    b.Navigation("GorevAtamalar");
                 });
 
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.Users", b =>
                 {
-                    b.HasOne("HukukBuroYonetimSistemi.Models.Domain.GorevAtamalar", "GorevAtama")
-                        .WithMany()
-                        .HasForeignKey("GorevAtamaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GorevAtama");
-                });
-
-            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.GorevAtamalar", b =>
-                {
-                    b.Navigation("GorevAtama")
-                        .IsRequired();
+                    b.Navigation("GorevAtamalar");
                 });
 #pragma warning restore 612, 618
         }

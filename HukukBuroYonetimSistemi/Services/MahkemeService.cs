@@ -15,5 +15,10 @@ namespace BaseProject.Services
         {
             _mahkemeRepository.Kaydet(model);
         }
+        public List<Mahkemeler> GetMahkemelerByUserId(int UserId)
+        {
+            var mahkeme = _mahkemeRepository.GetMahkemelerByUserId(UserId);
+            return mahkeme;
+        }
     }
 }
