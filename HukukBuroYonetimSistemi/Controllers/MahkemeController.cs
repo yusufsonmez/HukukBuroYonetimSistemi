@@ -28,7 +28,7 @@ namespace HukukBuroYonetimSistemi.Controllers
             // Diğer verileri de alabilirsiniz ve kullanabilirsiniz.
 
             // İşlemler tamamlandıktan sonra istediğiniz bir sayfaya yönlendirin veya başka bir işlem yapın
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Dashboard");
         }
         public List<Mahkemeler> GetMahkemelerByUserId(int userId)
         {

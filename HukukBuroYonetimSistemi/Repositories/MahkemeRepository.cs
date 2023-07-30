@@ -1,5 +1,6 @@
 ﻿using HukukBuroYonetimSistemi.Data;
 using HukukBuroYonetimSistemi.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseProject.Repositories
 {
@@ -20,6 +21,13 @@ namespace BaseProject.Repositories
             _mahkemeDbContext.Add(model);
             _mahkemeDbContext.SaveChanges();
 
+            //_mahkemeDbContext.Add(model);
+            //model.GorevAtamalar.MahkemeId = model.Id;
+            //model.GorevAtamalar.IsActive = true;
+            //model.GorevAtamalar.IsDeleted = false;
+            //model.GorevAtamalar.InsertDate = DateTime.Now;
+            //model.GorevAtamalar.UpdateDate = DateTime.Now;
+            //model.GorevAtamalar.UserId = model.GorevAtamalar.UserId;
             // Görev atamalarını ilişkili olarak ekleyin
             if (model.GorevAtamalar != null)
             {
@@ -47,6 +55,25 @@ namespace BaseProject.Repositories
                 .ToList();
 
             return mahkemeler;
+        }
+        public List<GorevAtamalar> GetMahkemeler()
+        {
+            // UserId ile görevAtamalar tablosundan ilgili görev atamalarını seçin
+            //GorevAtamalar gorevAtamalar = _mahkemeDbContext.GorevAtamalar
+            //    .Include(u => u.User)
+            //    .ToList();
+            var gorevAtamalar = _mahkemeDbContext.GorevAtamalar
+                .Include(u => u.User)
+                .ToList();
+
+            // Görev atamalarının MahkemeId'lerini alarak ilgili mahkemeleri çekin
+            var mahkemeler = _mahkemeDbContext.Mahkemeler
+                .Where(m => gorevAtamalar.Select(g => g.MahkemeId).Contains(m.Id))
+                .ToList();
+
+            //gorevAtamalar.Mahkeme = mahkemeler.ToList();
+
+            return gorevAtamalar;
         }
     }
 }

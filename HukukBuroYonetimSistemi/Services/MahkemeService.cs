@@ -17,8 +17,13 @@ namespace BaseProject.Services
         }
         public List<Mahkemeler> GetMahkemelerByUserId(int UserId)
         {
-            var mahkeme = _mahkemeRepository.GetMahkemelerByUserId(UserId);
-            return mahkeme;
+            var mahkemeler = _mahkemeRepository.GetMahkemelerByUserId(UserId);
+            return mahkemeler;
+        }
+        public List<GorevAtamalar> GetMahkemeler()
+        {
+            var mahkemeler = _mahkemeRepository.GetMahkemeler();
+            return mahkemeler;
         }
     }
 }

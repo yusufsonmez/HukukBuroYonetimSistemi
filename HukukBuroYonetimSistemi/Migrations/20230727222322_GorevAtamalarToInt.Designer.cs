@@ -4,6 +4,7 @@ using HukukBuroYonetimSistemi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HukukBuroYonetimSistemi.Migrations
 {
     [DbContext(typeof(MahkemeDbContext))]
-    partial class MahkemeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230727222322_GorevAtamalarToInt")]
+    partial class GorevAtamalarToInt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,10 +158,6 @@ namespace HukukBuroYonetimSistemi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Statu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SurName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

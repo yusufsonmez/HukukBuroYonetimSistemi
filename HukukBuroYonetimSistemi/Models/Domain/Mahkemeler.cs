@@ -20,6 +20,7 @@ namespace HukukBuroYonetimSistemi.Models.Domain
         // Mahkemenin birçok görevi olabilir
         //public ICollection<GorevAtamalar> GorevAtamalar { get; set; }
         public int GorevAtamalar { get; set; }
+        //public GorevAtamalar GorevAtamalar { get; set; }
         public DateTime DurusmaTarihi { get; set; }
         public DateTime InsertDate { get; set; }
         public DateTime UpdateDate { get; set; }

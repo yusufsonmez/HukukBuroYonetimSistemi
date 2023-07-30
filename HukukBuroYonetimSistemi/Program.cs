@@ -11,6 +11,8 @@ builder.Services.AddDbContext<MahkemeDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<MahkemeRepository>();
 builder.Services.AddScoped<MahkemeService>();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 
@@ -31,6 +33,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.Run();
