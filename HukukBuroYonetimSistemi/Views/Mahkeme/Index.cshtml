@@ -1,0 +1,237 @@
+﻿@model HukukBuroYonetimSistemi.Models.View.MahkemeEkleViewModel
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+        <div class="white-box">
+
+            <form method="post" action="/Mahkeme/Kaydet">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Mahkeme Section (Left Side) -->
+                        <div class="col-md-6">
+                            <h3 class="box-title">Mahkeme</h3>
+
+                        @foreach (var item in Model.MahkemelerWebViews)
+                        {
+                            if (item.IdForView == "YargiTuru" || item.IdForView == "YargiBirimi" ||
+                            item.IdForView == "GelenEvrakTuru" || item.IdForView == "TebligTuru" ||
+                            item.IdForView == "Mahkeme")
+                            {
+                                <div class="form-group">
+                                    <label for="@item.ForForView" class="col-form-label">@item.LabelForView</label>
+                                    <select id="@item.IdForView" name="@item.NameForView" class="form-control">
+                                        @if (item.IdForView == "YargiBirimi")
+                                        {
+                                            @*var selectedYargiTuruIds = Model.MahkemelerWebViewsValues
+                                            .Where(v => v.MahkemeWebViewId == item.Id)
+                                            .Select(v => v.Value)
+                                            .ToList();*@
+
+                                            var YargiBirimiIds = Model.MahkemelerWebViewsValues
+                                            .Where(v => v.Id < 8)
+                                            .Select(v => v.Value)
+                                            .ToList();
+
+                                            var mahkemeWebViewId = 3; // Bu değeri dinamik olarak almalısınız veya istediğiniz Id'yi belirlemelisiniz.
+
+                                            var relatedYargiBirimleri = Model.MahkemelerWebViewsValues
+                                            .Where(v => v.RelationId == mahkemeWebViewId)
+                                            .ToList();
+                                            
+                                            foreach (var value in relatedYargiBirimleri)
+                                            {
+                                                <option value="@value.Value">@value.Value</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach (var value in Model.MahkemelerWebViewsValues)
+                                            {
+                                                if (value.MahkemeWebViewId == item.Id)
+                                                {
+                                                    <option value="@value.Value">@value.Value</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            }
+                            else if (item.IdForView == "DosyaNo" || item.IdForView == "TebligTarihi" || item.IdForView == "DurusmaTarihi")
+                            {
+                                <div class="form-group">
+                                    <label for="@item.ForForView" class="col-form-label">@item.LabelForView</label>
+                                    <input type="text" id="@item.IdForView" name="@item.NameForView" class="form-control" placeholder="@item.Placeholder">
+                                </div>
+                            }
+                        }
+
+                            <!-- Yargı Türü -->
+                            @*<div class="form-group">
+                                <label for="YargiTuru" class="col-form-label">Yargı Türü</label>
+                                <select id="YargiTuru" name="YargiTuru" class="form-control">
+
+                                    <option value="Sulh Ceza"></option>
+                                    <option value="Asliye Ceza">Asliye Ceza</option>
+                                    <option value="Hukuk">Hukuk</option>
+                                </select>
+                            </div>*@
+
+                            <!-- Yargı Birimi -->
+                            @*<div class="form-group">
+                                <label for="YargiBirimi" class="col-form-label">Yargı Birimi</label>
+                                <select id="YargiBirimi" name="YargiBirimi" class="form-control">
+                                    <option value="Sulh Ceza">Sulh Ceza</option>
+                                    <option value="Asliye Ceza">Asliye Ceza</option>
+                                    <option value="Hukuk">Hukuk</option>
+                                </select>
+                            </div>*@
+
+                            <!-- Gelen Evrak Türü -->
+                            @*<div class="form-group">
+                                <label for="GelenEvrakTuru" class="col-form-label">Gelen Evrak Türü</label>
+                                <select id="GelenEvrakTuru" name="GelenEvrakTuru" class="form-control">
+                                    <option value="Dava dilekçesi">Dava dilekçesi</option>
+                                    <option value="Cevap Dilekçesi">Cevap Dilekçesi</option>
+                                    <option value="Cevaba Cevap Dilekçesi">Cevaba Cevap Dilekçesi</option>
+                                </select>
+                            </div>*@
+
+                        <!-- Dosya No -->
+                        @foreach (var item in Model.MahkemelerWebViews)
+                        {
+                            if(item.IdForView== "DosyaNo")
+                            {
+                                <div class="form-group">
+                                    <label for=@item.ForForView class="col-form-label">@item.LabelForView</label>
+                                    <input type="text" id=@item.IdForView name=@item.NameForView class="form-control" placeholder=@item.Placeholder>
+                                </div>
+                            }
+                        }
+
+                            <!-- Tebliğ Türü -->
+                            @*<div class="form-group">
+                                <label for="TebligTuru" class="col-form-label">Tebliğ Türü</label>
+                                <select id="TebligTuru" name="TebligTuru" class="form-control">
+                                    <option value="E-Tebligat">E-Tebligat</option>
+                                    <option value="Fiziki Tebligat">Fiziki Tebligat</option>
+                                </select>
+                            </div>*@
+
+                            @foreach (var item in Model.MahkemelerWebViews)
+                            {
+                                if (item.IdForView == "TebligTarihi" || item.IdForView == "DurusmaTarihi")
+                                {
+                                    <div class="form-group">
+                                        <label for=@item.ForForView class="col-form-label">@item.LabelForView</label>
+                                        <input type="date" id=@item.IdForView name=@item.NameForView class="form-control" placeholder=@item.Placeholder>
+                                    </div>
+                                }
+                            }
+
+                            @*<!-- Tebliğ Tarihi -->
+                            <div class="form-group">
+                                <label for="TebligTarihi" class="col-form-label">Tebliğ Tarihi</label>
+                                <input type="date" id="TebligTarihi" name="TebligTarihi" class="form-control" placeholder="Tebliğ Tarihi">
+                            </div>
+
+                            <!-- Duruşma Tarihi -->
+                            <div class="form-group">
+                                <label for="DurusmaTarihi" class="col-form-label">Duruşma Tarihi</label>
+                                <input type="date" id="DurusmaTarihi" name="DurusmaTarihi" class="form-control" placeholder="DurusmaTarihi">
+                            </div>*@
+
+                            <!-- Kaydet -->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">Kaydet</button>
+                            </div>
+                        </div>
+
+                        <!-- Diğer Section (Right Side) -->
+                        <div class="col-md-6">
+                            <h3 class="box-title">Diğer</h3>
+
+                            <!-- Diğer -->
+                            <div class="form-group">
+                                <label for="Diger" class="col-form-label">Diğer</label>
+                                <select id="Diger" name="Diger" class="form-control">
+                                    <option value="Ihtarname">İhtarname</option>
+                                    <option value="Sozlesme">Sözleşme</option>
+                                </select>
+                            </div>
+
+                            <!-- İş Türü -->
+                            <div class="form-group">
+                                <label for="IsTuru" class="col-form-label">İş Türü</label>
+                                <select id="IsTuru" name="IsTuru" class="form-control">
+                                    <option value="IsTuru">Dava Aç</option>
+                                </select>
+                            </div>
+
+                            <!-- Gelme Tarihi -->
+                            <div class="form-group">
+                                <label for="GelmeTarihi" class="col-form-label">Gelme Tarihi</label>
+                                <input type="date" id="GelmeTarihi" name="GelmeTarihi" class="form-control" placeholder="Gelme Tarihi">
+                            </div>
+
+                            <!-- Hedef Süre Son Gün -->
+                            <div class="form-group">
+                                <label for="HedefSureSonGun" class="col-form-label">Hedef Süre Son Gün</label>
+                                <input type="date" id="HedefSureSonGun" name="HedefSureSonGun" class="form-control" placeholder="Hedef Süre Son Gün">
+                            </div>
+
+                            <!-- Görev -->
+                            <div class="form-group">
+                                <label for="Gorev" class="col-form-label">Görev</label>
+                                <input type="date" id="Gorev" name="Gorev" class="form-control" placeholder="Görev">
+                            </div>
+
+                            <!-- Görev Atama -->
+                            <div class="form-group">
+                                <label for="GorevAtamalar" class="col-form-label">Görev Atama</label>
+                                <select id="GorevAtamalar" name="GorevAtamalar" class="form-control">
+                                    <option value="3">Mehmet Cem Sönmez</option>
+                                    <option value="4">Yusuf Sönmez</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../wwwroot/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    @*<script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="../wwwroot/scss/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../wwwroot/scss/core/loader/spinner.scss"></script>
+    <script src="../wwwroot/js/app-style-switcher.js"></script>
+    <script src="../wwwroot/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="../wwwroot/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../wwwroot/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../wwwroot/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="../wwwroot/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="../wwwroot/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="../wwwroot/js/pages/dashboards/dashboard1.js"></script>
+</body>
+
+</html>

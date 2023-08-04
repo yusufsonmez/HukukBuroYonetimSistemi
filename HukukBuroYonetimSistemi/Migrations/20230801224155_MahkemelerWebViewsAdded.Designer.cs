@@ -4,6 +4,7 @@ using HukukBuroYonetimSistemi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HukukBuroYonetimSistemi.Migrations
 {
     [DbContext(typeof(MahkemeDbContext))]
-    partial class MahkemeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230801224155_MahkemelerWebViewsAdded")]
+    partial class MahkemelerWebViewsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,10 +109,6 @@ namespace HukukBuroYonetimSistemi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Mahkeme")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("TebligTarihi")
                         .HasColumnType("datetime2");
 
@@ -149,7 +148,7 @@ namespace HukukBuroYonetimSistemi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("InsertDate")
+                    b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -166,21 +165,14 @@ namespace HukukBuroYonetimSistemi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Placeholder")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdateDate")
+                    b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ValueForView")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ValuesForMahkemeWebViewsId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ValuesForMahkemeWebViewsId");
 
                     b.ToTable("MahkemelerWebViews");
                 });
@@ -230,44 +222,6 @@ namespace HukukBuroYonetimSistemi.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeWebViews", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MahkemeWebViewId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Permission")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RelationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ValuesForMahkemeVewViews");
-                });
-
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.GorevAtamalar", b =>
                 {
                     b.HasOne("HukukBuroYonetimSistemi.Models.Domain.Mahkemeler", "Mahkeme")
@@ -287,21 +241,9 @@ namespace HukukBuroYonetimSistemi.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.MahkemelerWebViews", b =>
-                {
-                    b.HasOne("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeWebViews", null)
-                        .WithMany("MahkemelerWebViews")
-                        .HasForeignKey("ValuesForMahkemeWebViewsId");
-                });
-
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.Users", b =>
                 {
                     b.Navigation("GorevAtamalar");
-                });
-
-            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeWebViews", b =>
-                {
-                    b.Navigation("MahkemelerWebViews");
                 });
 #pragma warning restore 612, 618
         }

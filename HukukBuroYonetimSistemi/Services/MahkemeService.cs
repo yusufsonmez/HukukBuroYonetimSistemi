@@ -1,5 +1,6 @@
 ﻿using BaseProject.Repositories;
 using HukukBuroYonetimSistemi.Models.Domain;
+using HukukBuroYonetimSistemi.Models.View;
 
 namespace BaseProject.Services
 {
@@ -23,6 +24,11 @@ namespace BaseProject.Services
         public List<GorevAtamalar> GetMahkemeler()
         {
             var mahkemeler = _mahkemeRepository.GetMahkemeler();
+            return mahkemeler;
+        }
+        public (List<MahkemelerWebViews>, List<ValuesForMahkemeWebViews>) GetMahkemeViews()
+        {
+            var mahkemeler = _mahkemeRepository.GetMahkemeViews();
             return mahkemeler;
         }
     }

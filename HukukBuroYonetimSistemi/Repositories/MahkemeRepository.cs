@@ -1,5 +1,6 @@
 ﻿using HukukBuroYonetimSistemi.Data;
 using HukukBuroYonetimSistemi.Models.Domain;
+using HukukBuroYonetimSistemi.Models.View;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseProject.Repositories
@@ -74,6 +75,16 @@ namespace BaseProject.Repositories
             //gorevAtamalar.Mahkeme = mahkemeler.ToList();
 
             return gorevAtamalar;
+        }
+        public (List<MahkemelerWebViews>, List<ValuesForMahkemeWebViews>) GetMahkemeViews()
+        {
+            var mahkemeVewViews = _mahkemeDbContext.MahkemelerWebViews.ToList();
+
+            var values = _mahkemeDbContext.ValuesForMahkemeVewViews
+                .Where(v => mahkemeVewViews.Select(g => g.Id).Contains(v.MahkemeWebViewId))
+                .ToList();
+
+            return (mahkemeVewViews, values);
         }
     }
 }

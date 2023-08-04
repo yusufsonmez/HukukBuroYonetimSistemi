@@ -1,5 +1,6 @@
 ﻿using BaseProject.Services;
 using HukukBuroYonetimSistemi.Models.Domain;
+using HukukBuroYonetimSistemi.Models.View;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HukukBuroYonetimSistemi.Controllers
@@ -13,7 +14,19 @@ namespace HukukBuroYonetimSistemi.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            //MahkemelerWebViews gelecek buraya
+            var mahkemeViews = _mahkemeService.GetMahkemeViews();
+            
+            // Değerleri almak için tuple'dan ayrıştırın
+            List<MahkemelerWebViews> mahkemeWebViews = mahkemeViews.Item1;
+            List<ValuesForMahkemeWebViews> values = mahkemeViews.Item2;
+
+            //mahkemeEkleViewModel = mahkemeViews.Item1;
+            MahkemeEkleViewModel mahkemeEkleViewModel   = new MahkemeEkleViewModel();
+            mahkemeEkleViewModel.MahkemelerWebViews = mahkemeWebViews;
+            mahkemeEkleViewModel.MahkemelerWebViewsValues = values;
+
+            return View(mahkemeEkleViewModel);
         }
 
         [HttpPost]
@@ -23,7 +36,7 @@ namespace HukukBuroYonetimSistemi.Controllers
 
             // Örneğin, Mahkeme verisini alalım:
             _mahkemeService.Kaydet(model);
-            string mahkeme = model.Mahkeme;
+            string mahkeme = model.YargiBirimi;
 
             // Diğer verileri de alabilirsiniz ve kullanabilirsiniz.
 

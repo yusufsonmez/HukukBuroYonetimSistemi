@@ -6,6 +6,8 @@ namespace HukukBuroYonetimSistemi.Models.Domain
     {
         [Key]
         public int Id { get; set; }
+        public string YargiTuru { get; set; }
+        public string YargiBirimi { get; set; }
         public string Mahkeme { get; set; }
         public string DosyaNo { get; set; }
         public string GelenEvrakTuru { get; set; }

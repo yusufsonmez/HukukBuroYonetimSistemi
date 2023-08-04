@@ -4,6 +4,7 @@ using HukukBuroYonetimSistemi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HukukBuroYonetimSistemi.Migrations
 {
     [DbContext(typeof(MahkemeDbContext))]
-    partial class MahkemeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230802215933_MahkemeWebWiewsMahkemeColumn")]
+    partial class MahkemeWebWiewsMahkemeColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,12 +178,12 @@ namespace HukukBuroYonetimSistemi.Migrations
                     b.Property<string>("ValueForView")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ValuesForMahkemeWebViewsId")
+                    b.Property<int?>("ValuesForMahkemeVewViewsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ValuesForMahkemeWebViewsId");
+                    b.HasIndex("ValuesForMahkemeVewViewsId");
 
                     b.ToTable("MahkemelerWebViews");
                 });
@@ -230,7 +233,7 @@ namespace HukukBuroYonetimSistemi.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeWebViews", b =>
+            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeVewViews", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -252,9 +255,6 @@ namespace HukukBuroYonetimSistemi.Migrations
 
                     b.Property<string>("Permission")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RelationId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -289,9 +289,9 @@ namespace HukukBuroYonetimSistemi.Migrations
 
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.MahkemelerWebViews", b =>
                 {
-                    b.HasOne("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeWebViews", null)
+                    b.HasOne("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeVewViews", null)
                         .WithMany("MahkemelerWebViews")
-                        .HasForeignKey("ValuesForMahkemeWebViewsId");
+                        .HasForeignKey("ValuesForMahkemeVewViewsId");
                 });
 
             modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.Users", b =>
@@ -299,7 +299,7 @@ namespace HukukBuroYonetimSistemi.Migrations
                     b.Navigation("GorevAtamalar");
                 });
 
-            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeWebViews", b =>
+            modelBuilder.Entity("HukukBuroYonetimSistemi.Models.Domain.ValuesForMahkemeVewViews", b =>
                 {
                     b.Navigation("MahkemelerWebViews");
                 });

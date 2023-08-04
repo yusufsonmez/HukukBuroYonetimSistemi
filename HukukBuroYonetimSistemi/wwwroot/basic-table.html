@@ -1,6 +1,3 @@
-<!--@using HukukBuroYonetimSistemi.Models.Domain;
-@model Mahkemeler-->
-
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -236,10 +233,22 @@
                             <div class="col-md-6">
                                 <h3 class="box-title">Mahkeme</h3>
 
-                                <!-- Mahkeme -->
+                                
+                                <!-- Yargı Türü -->
                                 <div class="form-group">
-                                    <label for="Mahkeme" class="col-form-label">Mahkeme</label>
-                                    <select id="Mahkeme" name="Mahkeme" class="form-control">
+                                    <label for="YargiTuru" class="col-form-label">Yargı Türü</label>
+                                    <select id="YargiTuru" name="YargiTuru" class="form-control">
+
+                                        <option value="Sulh Ceza"></option>
+                                        <option value="Asliye Ceza">Asliye Ceza</option>
+                                        <option value="Hukuk">Hukuk</option>
+                                    </select>
+                                </div>
+
+                                <!-- Yargı Birimi -->
+                                <div class="form-group">
+                                    <label for="YargiBirimi" class="col-form-label">Yargı Birimi</label>
+                                    <select id="YargiBirimi" name="YargiBirimi" class="form-control">
                                         <option value="Sulh Ceza">Sulh Ceza</option>
                                         <option value="Asliye Ceza">Asliye Ceza</option>
                                         <option value="Hukuk">Hukuk</option>
@@ -287,10 +296,10 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success">Kaydet</button>
                                 </div>
-                        </div>
+                            </div>
 
-                        <!-- Diğer Section (Right Side) -->
-                        <div class="col-md-6">
+                            <!-- Diğer Section (Right Side) -->
+                            <div class="col-md-6">
                                 <h3 class="box-title">Diğer</h3>
 
                                 <!-- Diğer -->
@@ -338,26 +347,26 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Wrapper -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- All Jquery -->
-            <!-- ============================================================== -->
-            <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-            <!-- Bootstrap tether Core JavaScript -->
-            <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="js/app-style-switcher.js"></script>
-            <!--Wave Effects -->
-            <script src="js/waves.js"></script>
-            <!--Menu sidebar -->
-            <script src="js/sidebarmenu.js"></script>
-            <!--Custom JavaScript -->
-            <script src="js/custom.js"></script>
+        <!-- ============================================================== -->
+        <!-- End Wrapper -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/app-style-switcher.js"></script>
+        <!--Wave Effects -->
+        <script src="js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="js/custom.js"></script>
 </body>
 
 </html>
