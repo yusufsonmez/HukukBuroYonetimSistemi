@@ -19,32 +19,43 @@
             <form method="post" action="/Mahkeme/Kaydet">
                 <div class="container-fluid">
                     <div class="row">
+                    <!-- Geçiş Düğmeleri -->
+                    <div class="form-group">
+                        <button id="mahkemeBtn" type="button" class="btn btn-primary">Mahkeme</button>
+                        <button id="digerBtn" type="button" class="btn btn-secondary">Diğer</button>
+                    </div>
+
                         <!-- Mahkeme Section (Left Side) -->
+                    <div class="col-md-6" id="mahkemeSection">
                         <div class="col-md-6">
                             <h3 class="box-title">Mahkeme</h3>
 
                         @foreach (var item in Model.MahkemelerWebViews)
                         {
                             if (item.IdForView == "YargiTuru" || item.IdForView == "YargiBirimi" ||
-                            item.IdForView == "GelenEvrakTuru" || item.IdForView == "TebligTuru" ||
-                            item.IdForView == "Mahkeme")
+                            item.IdForView == "GelenEvrakTuru" || item.IdForView == "TebligTuru")
                             {
                                 <div class="form-group">
                                     <label for="@item.ForForView" class="col-form-label">@item.LabelForView</label>
-                                    <select id="@item.IdForView" name="@item.NameForView" class="form-control">
-                                        @if (item.IdForView == "YargiBirimi")
+                                    <select id="yargiTuruSelect" name="@item.NameForView" class="form-control">
+                                        @if (item.IdForView == "YargiTuru")
                                         {
-                                            @*var selectedYargiTuruIds = Model.MahkemelerWebViewsValues
-                                            .Where(v => v.MahkemeWebViewId == item.Id)
-                                            .Select(v => v.Value)
-                                            .ToList();*@
-
+                                            foreach (var value in Model.MahkemelerWebViewsValues)
+                                            {
+                                                if (value.MahkemeWebViewId == item.Id)
+                                                {
+                                                    <option value="@value.Value" data-id="@value.Id">@value.Value</option>
+                                                }
+                                            }
+                                        }
+                                        else if (item.IdForView == "YargiBirimi")
+                                        {
                                             var YargiBirimiIds = Model.MahkemelerWebViewsValues
                                             .Where(v => v.Id < 8)
                                             .Select(v => v.Value)
                                             .ToList();
 
-                                            var mahkemeWebViewId = 3; // Bu değeri dinamik olarak almalısınız veya istediğiniz Id'yi belirlemelisiniz.
+                                            var mahkemeWebViewId = 1;
 
                                             var relatedYargiBirimleri = Model.MahkemelerWebViewsValues
                                             .Where(v => v.RelationId == mahkemeWebViewId)
@@ -52,7 +63,25 @@
                                             
                                             foreach (var value in relatedYargiBirimleri)
                                             {
-                                                <option value="@value.Value">@value.Value</option>
+                                                <option data-id="@value.Id" value="@value.Value">@value.Value</option>
+                                            }
+                                        }
+                                        else if (item.IdForView == "GelenEvrakTuru")
+                                        {
+                                            var YargiBirimiIds = Model.MahkemelerWebViewsValues
+                                            .Where(v => v.Id < 47 && v.Id >43)
+                                            .Select(v => v.Value)
+                                            .ToList();
+
+                                            var mahkemeWebViewId = 8;
+
+                                            var relatedYargiBirimleri = Model.MahkemelerWebViewsValues
+                                            .Where(v => v.RelationId == mahkemeWebViewId)
+                                            .ToList();
+
+                                            foreach (var value in relatedYargiBirimleri)
+                                            {
+                                                <option data-id="@value.Id" value="@value.Value">@value.Value</option>
                                             }
                                         }
                                         else
@@ -65,73 +94,23 @@
                                                 }
                                             }
                                         }
+                                        
                                     </select>
                                 </div>
                             }
-                            else if (item.IdForView == "DosyaNo" || item.IdForView == "TebligTarihi" || item.IdForView == "DurusmaTarihi")
-                            {
-                                <div class="form-group">
-                                    <label for="@item.ForForView" class="col-form-label">@item.LabelForView</label>
-                                    <input type="text" id="@item.IdForView" name="@item.NameForView" class="form-control" placeholder="@item.Placeholder">
-                                </div>
-                            }
+                            else if (item.IdForView == "Mahkeme" || item.IdForView == "DosyaNo")
+                                    {
+                                        <div class="form-group">
+                                            <label for="@item.ForForView" class="col-form-label">@item.LabelForView</label>
+                                            <input type="text" id="@item.IdForView" name="@item.NameForView" class="form-control" placeholder="@item.Placeholder">
+                                        </div>
+                                    }
                         }
-
-                            <!-- Yargı Türü -->
-                            @*<div class="form-group">
-                                <label for="YargiTuru" class="col-form-label">Yargı Türü</label>
-                                <select id="YargiTuru" name="YargiTuru" class="form-control">
-
-                                    <option value="Sulh Ceza"></option>
-                                    <option value="Asliye Ceza">Asliye Ceza</option>
-                                    <option value="Hukuk">Hukuk</option>
-                                </select>
-                            </div>*@
-
-                            <!-- Yargı Birimi -->
-                            @*<div class="form-group">
-                                <label for="YargiBirimi" class="col-form-label">Yargı Birimi</label>
-                                <select id="YargiBirimi" name="YargiBirimi" class="form-control">
-                                    <option value="Sulh Ceza">Sulh Ceza</option>
-                                    <option value="Asliye Ceza">Asliye Ceza</option>
-                                    <option value="Hukuk">Hukuk</option>
-                                </select>
-                            </div>*@
-
-                            <!-- Gelen Evrak Türü -->
-                            @*<div class="form-group">
-                                <label for="GelenEvrakTuru" class="col-form-label">Gelen Evrak Türü</label>
-                                <select id="GelenEvrakTuru" name="GelenEvrakTuru" class="form-control">
-                                    <option value="Dava dilekçesi">Dava dilekçesi</option>
-                                    <option value="Cevap Dilekçesi">Cevap Dilekçesi</option>
-                                    <option value="Cevaba Cevap Dilekçesi">Cevaba Cevap Dilekçesi</option>
-                                </select>
-                            </div>*@
-
-                        <!-- Dosya No -->
-                        @foreach (var item in Model.MahkemelerWebViews)
-                        {
-                            if(item.IdForView== "DosyaNo")
-                            {
-                                <div class="form-group">
-                                    <label for=@item.ForForView class="col-form-label">@item.LabelForView</label>
-                                    <input type="text" id=@item.IdForView name=@item.NameForView class="form-control" placeholder=@item.Placeholder>
-                                </div>
-                            }
-                        }
-
-                            <!-- Tebliğ Türü -->
-                            @*<div class="form-group">
-                                <label for="TebligTuru" class="col-form-label">Tebliğ Türü</label>
-                                <select id="TebligTuru" name="TebligTuru" class="form-control">
-                                    <option value="E-Tebligat">E-Tebligat</option>
-                                    <option value="Fiziki Tebligat">Fiziki Tebligat</option>
-                                </select>
-                            </div>*@
 
                             @foreach (var item in Model.MahkemelerWebViews)
                             {
-                                if (item.IdForView == "TebligTarihi" || item.IdForView == "DurusmaTarihi")
+                                @*if (item.IdForView == "TebligTarihi" || item.IdForView == "DurusmaTarihi")*@
+                                if (item.IdForView == "TebligTarihi")
                                 {
                                     <div class="form-group">
                                         <label for=@item.ForForView class="col-form-label">@item.LabelForView</label>
@@ -140,25 +119,10 @@
                                 }
                             }
 
-                            @*<!-- Tebliğ Tarihi -->
-                            <div class="form-group">
-                                <label for="TebligTarihi" class="col-form-label">Tebliğ Tarihi</label>
-                                <input type="date" id="TebligTarihi" name="TebligTarihi" class="form-control" placeholder="Tebliğ Tarihi">
-                            </div>
-
-                            <!-- Duruşma Tarihi -->
-                            <div class="form-group">
-                                <label for="DurusmaTarihi" class="col-form-label">Duruşma Tarihi</label>
-                                <input type="date" id="DurusmaTarihi" name="DurusmaTarihi" class="form-control" placeholder="DurusmaTarihi">
-                            </div>*@
-
-                            <!-- Kaydet -->
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-success">Kaydet</button>
-                            </div>
                         </div>
-
+                        </div>
                         <!-- Diğer Section (Right Side) -->
+                    <div class="col-md-6" id="digerSection" style="display:none;">
                         <div class="col-md-6">
                             <h3 class="box-title">Diğer</h3>
 
@@ -206,8 +170,13 @@
                                 </select>
                             </div>
                         </div>
+                        </div>
+                    <!-- Kaydet -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
                     </div>
-                </div>
+                    </div>
+                    </div>
             </form>
         </div>
 
@@ -235,3 +204,128 @@
 </body>
 
 </html>
+
+<script>
+    var yargiTuruSelect = document.getElementById("yargiTuruSelect"); // Doğru bir şekilde hedeflendiğinden emin olun
+
+    // Option seçildiğinde çalışacak fonksiyon
+    yargiTuruSelect.addEventListener("change", function () {
+        // Seçilen option elementini alın
+        var selectedOption = yargiTuruSelect.options[yargiTuruSelect.selectedIndex];
+
+        // Seçilen optionun data-id değerini alın
+        var selectedId = selectedOption.getAttribute("data-id");
+
+        // Mahkeme WebView Id'sini güncelleyin
+        mahkemeWebViewId = selectedId;
+        console.log("Yeni Mahkeme WebView ID: " + mahkemeWebViewId);
+
+        // Yargı Türü'ne göre Yargı Birimi optionlarını güncelleyin
+        updateYargiBirimiOptions(selectedId);
+    });
+
+    // Yargı Birimi optionlarını güncelleyen fonksiyon
+    function updateYargiBirimiOptions(selectedYargiTuruId) {
+        var yargiBirimleri = getYargiBirimleriByYargiTuru(selectedYargiTuruId);
+
+        // Yargı Birimi select öğesini bulun
+        var yargiBirimleriSelect = document.querySelector('select[name="YargiBirimi"]');
+
+        if (yargiBirimleriSelect) {
+            // Mevcut optionları temizleyin
+            yargiBirimleriSelect.innerHTML = "";
+
+            // Yeni optionları ekleyin
+            yargiBirimleri.forEach(function (yargiBirimi) {
+                yargiBirimleriSelect.appendChild(new Option(yargiBirimi.text, yargiBirimi.value));
+            });
+        }
+    }
+
+    // Yargı Türüne göre Yargı Birimi optionlarını getiren fonksiyon
+    function getYargiBirimleriByYargiTuru(yargiTuruId) {
+        var yargiBirimleri = [];
+
+        if (yargiTuruId === "1") { // Ceza
+            yargiBirimleri = [
+                { value: "AĞIR CEZA MAHKEMESİ", text: "AĞIR CEZA MAHKEMESİ" },
+                { value: "ASLİYE CEZA MAHKEMESİ", text: "ASLİYE CEZA MAHKEMESİ" },
+                { value: "Bölge Adliye Mah. Ceza Dairesi", text: "Bölge Adliye Mah. Ceza Dairesi" },
+                { value: "ÇOCUK AĞIR CEZA MAHKEMESİ", text: "ÇOCUK AĞIR CEZA MAHKEMESİ" },
+                { value: "ÇOCUK MAHKEMESİ", text: "ÇOCUK MAHKEMESİ" },
+                { value: "FİKRİ VE SİNAİ HAKLAR MAHKEMESİ", text: "FİKRİ VE SİNAİ HAKLAR MAHKEMESİ" },
+                { value: "İCRA CEZA HAKİMLİĞİ", text: "İCRA CEZA HAKİMLİĞİ" },
+                { value: "İNFAZ HAKİMLİĞİ", text: "İNFAZ HAKİMLİĞİ" },
+                { value: "SULH CEZA HAKİMLİĞİ", text: "SULH CEZA HAKİMLİĞİ" },
+                { value: "TRAFİK MAHKEMESİ", text: "TRAFİK MAHKEMESİ" },
+                { value: "YARGITAY CEZA DAİRESİ İLK DERECE", text: "YARGITAY CEZA DAİRESİ İLK DERECE" },
+                { value: "Diğer", text: "Diğer" },
+            ];
+        } else if (yargiTuruId === "3") { // Hukuk
+            yargiBirimleri = [
+                { value: "AİLE MAHKEMESİ", text: "AİLE MAHKEMESİ" },
+                { value: "ASLİYE HUKUK MAHKEMESİ", text: "ASLİYE HUKUK MAHKEMESİ" },
+                { value: "ASLİYE TİCARET MAHKEMESİ", text: "ASLİYE TİCARET MAHKEMESİ" },
+                { value: "BAM Hukuk Dairesi(İlk Derece)", text: "BAM Hukuk Dairesi(İlk Derece)" },
+                { value: "Bölge Adliye Mah. Hukuk Dairesi", text: "Bölge Adliye Mah. Hukuk Dairesi" },
+                { value: "DENİZCİLİK İHTİSAS MAHKEMESİ", text: "DENİZCİLİK İHTİSAS MAHKEMESİ" },
+                { value: "FİKRİ VE SİNAİ HAKLAR HUKUK", text: "FİKRİ VE SİNAİ HAKLAR HUKUK" },
+                { value: "İCRA HUKUK MAHKEMESİ", text: "İCRA HUKUK MAHKEMESİ" },
+                { value: "İŞ MAHKEMESİ", text: "İŞ MAHKEMESİ" },
+                { value: "KADASTRO MAHKEMESİ", text: "KADASTRO MAHKEMESİ" },
+                { value: "SULH HUKUK MAHKEMESİ", text: "SULH HUKUK MAHKEMESİ" },
+                { value: "TÜKETİCİ MAHKEMESİ", text: "TÜKETİCİ MAHKEMESİ" },
+                { value: "Diğer", text: "Diğer" },
+            ];
+        }
+        else if (yargiTuruId === "4") { // İcra
+            yargiBirimleri = [
+                { value: "İCRA DAİRESİ", text: "İCRA DAİRESİ" },
+                { value: "Diğer", text: "Diğer" },
+            ];
+        }
+        else if (yargiTuruId === "5") { // İdari Yargı
+            yargiBirimleri = [
+                { value: "BÖLGE İDARE MAHKEMESİ", text: "BÖLGE İDARE MAHKEMESİ" },
+                { value: "İDARE MAHKEMESİ", text: "İDARE MAHKEMESİ" },
+                { value: "VERGİ MAHKEMESİ", text: "VERGİ MAHKEMESİ" },
+                { value: "Diğer", text: "Diğer" },
+            ];
+        }
+        else if (yargiTuruId === "6") { // Satış Memurluğu
+            yargiBirimleri = [
+                { value: "SATIŞ MEMURLUĞU", text: "SATIŞ MEMURLUĞU" },
+                { value: "Diğer", text: "Diğer" },
+            ];
+        }
+        else if (yargiTuruId === "7") { // Cbs
+            yargiBirimleri = [
+                { value: "Cbs", text: "Cbs" },
+                { value: "Diğer", text: "Diğer" },
+            ];
+        }
+
+        return yargiBirimleri;
+    }
+</script>
+
+<script>
+    var mahkemeBtn = document.getElementById("mahkemeBtn");
+    var digerBtn = document.getElementById("digerBtn");
+
+    var mahkemeSection = document.getElementById("mahkemeSection");
+    var digerSection = document.getElementById("digerSection");
+
+    // Mahkeme düğmesine tıklanırsa Mahkeme Bölümü göster, Diğer Bölümü gizle
+    mahkemeBtn.addEventListener("click", function () {
+        mahkemeSection.style.display = "block";
+        digerSection.style.display = "none";
+    });
+
+    // Diğer düğmesine tıklanırsa Diğer Bölümü göster, Mahkeme Bölümü gizle
+    digerBtn.addEventListener("click", function () {
+        mahkemeSection.style.display = "none";
+        digerSection.style.display = "block";
+    });
+
+</script>
